@@ -4,8 +4,8 @@ This is a simple utility project that can sync ROS1 topics to ROS2 topics in two
 ## Configuration
 
 1. Configure the ROS_MASTER_URI
-open docker-compose.yml file and change the value of ROS_MASTER_URI (services -> bridge -> environment -> ROS_MASTER_URI)
-this ROS Master can be on the same computer or a different computer. If it is a different computer you need to be on the same network (LAN)
+open docker-compose.yml file and change the value of ROS_MASTER_URI (services -> bridge -> environment -> ROS_MASTER_URI).
+This ROS Master can be on the same computer or a different computer. If it is a different computer you need to be on the same network (LAN)
 
 ```yml
     "ROS_MASTER_URI=http://<ip-address>:<port>"
