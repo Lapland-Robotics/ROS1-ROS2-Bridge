@@ -40,7 +40,7 @@ WORKDIR /app
 
 COPY ros2_ws ros2_ws/
 RUN cd ros2_ws && \
-    source /opt/ros/foxy/setup.bash && \
+    source /opt/ros/${ROS_DISTRO}/setup.bash && \
     colcon build
 
 COPY ros_entrypoint.sh /
