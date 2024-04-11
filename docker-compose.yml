@@ -7,8 +7,6 @@ services:
       dockerfile: ros2.Dockerfile
 
   bridge:
-    image: ros:foxy-ros1-bridge
-    environment:
-      - "ROS_HOSTNAME=bridge"
-      - "ROS_MASTER_URI=http://172.16.200.52:11311"
-    command: ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
+    build:
+      context: ./
+      dockerfile: ros1_bridge.Dockerfile
