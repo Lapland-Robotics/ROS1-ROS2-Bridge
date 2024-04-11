@@ -32,6 +32,21 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN echo 'source "/opt/ros/$ROS_DISTRO/setup.bash"' >> ~/.bashrc
 
+ENV TOPIC="/chatter"
+
+SHELL ["/bin/bash", "-c"]
+
+WORKDIR /app
+
+COPY ros2_ws ros2_ws/
+RUN cd ros2_ws && \
+    source /opt/ros/foxy/setup.bash && \
+    colcon build
+
+COPY ros_entrypoint.sh /
+
+ENTRYPOINT ["/ros_entrypoint.sh"]
+
 # launch ros package
-CMD ["ros2", "run", "demo_nodes_py", "listener"]
+CMD ["ros2", "run", "simple_listener", "listener_node"]
 # CMD ["sleep", "infinity"]

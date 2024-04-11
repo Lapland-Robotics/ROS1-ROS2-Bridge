@@ -28,21 +28,22 @@ This is a simple utility project that can sync ROS1 topics to ROS2 topics in two
 ## Configuration
 
 1. Configure the ROS_MASTER_URI
-open docker-compose.yml file and change the value of ROS_MASTER_URI (services -> bridge -> environment -> ROS_MASTER_URI).
+open ros1_bridge.Dockerfile file and change the value of ENV ROS_MASTER_URI.
 This ROS Master can be on the same computer or a different computer. If it is a different computer you need to be on the same network (LAN)
 
 ```yml
-    "ROS_MASTER_URI=http://<ip-address>:<port>"
+    ENV ROS_MASTER_URI="http://172.16.200.106:11311"
 ```
 
 2. Modify ros2.Dockerfile
 You can add any command/s to run your program after the ros2 docker container starts. 
-But just for initial testing, you can keep it unchanged.
+But just for initial testing, we have include a simple ROS2 program (simple_listener -> listener_node) to listen to a topic (configurable). 
+you can change the value of the "TOPIC" environment variable and listen that topic.
 
 ```yml
-    CMD ["ros2", "run", "demo_nodes_py", "listener"]
+    ENV TOPIC="/chatter"
 ```
-and you can run a talker node in ROS1 which publishes messages to /chatter topic
+finally you can run a talker node in ROS1 (Where ROS Master is Running). Then it can publishes messages to /chatter topic.
 
 ```bash
     roslaunch roscpp_tutorials talker_listener.launch
